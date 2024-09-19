@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             _hasDoubleJump = true;
         }
         // Checks both if jump is possible (Which it always is) and if the player is on the ground
-        if (_input.Jump)
+        if (_input.JumpPressed)
         {
             if (playerIsGrounded)
             {
@@ -88,7 +88,11 @@ public class PlayerController : MonoBehaviour
                 _audioSource.PlayOneShot(jumpSounds[Random.Range(2, jumpSounds.Length)]);
             }
         }
-
+        else if (_input.JumpRelease && !playerIsGrounded && _rigidbody2D.linearVelocity.y > 0f)
+        {
+            _rigidbody2D.linearVelocityY = 0f;
+            _audioSource.Stop();
+        }
         UpdateAnimation();
         Attack();
     }
