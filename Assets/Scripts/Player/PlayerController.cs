@@ -103,22 +103,22 @@ public class PlayerController : MonoBehaviour
         {
             if (_input.Horizontal != 0)
             {
-                _animator.Play("Player_Walk");
+                _animator.Play("Monkey_Walk");
             }
             else
             {
-                _animator.Play("Player_Idle");
+                _animator.Play("Monkey_Idle");
             }
         }
         else
         {
             if (_rigidbody2D.linearVelocityY > 0)
             {
-                _animator.Play("Player_Jump");
+                _animator.Play("Monkey_Jump");
             }
             else
             {
-                _animator.Play("Player_Fall");
+                _animator.Play("Monkey_Fall");
             }
         }
     }
