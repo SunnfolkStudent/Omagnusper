@@ -58,11 +58,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_rigidbody2D.linearVelocityX > 0.0f) {
-            _playerSpriteRenderer.flipX = false;
-        } else if (_rigidbody2D.linearVelocityX < 0.0f) {
-            _playerSpriteRenderer.flipX = true;
+
+        if (_input.Horizontal != 0)
+        {
+            if (_rigidbody2D.linearVelocityX >= 0.0f) 
+            {
+                _playerSpriteRenderer.flipX = false;
+            } 
+            else if (_rigidbody2D.linearVelocityX <= 0.0f) 
+            {
+                _playerSpriteRenderer.flipX = true;
+            }
         }
+        
+        
+        
         // Uses Physics2D.OverlapBox() to check if the ground and the player's bottom box is overlapping
         playerIsGrounded = Physics2D.OverlapBox(groundCheck.position, groundBoxSize, 0f, whatIsGround);
 
