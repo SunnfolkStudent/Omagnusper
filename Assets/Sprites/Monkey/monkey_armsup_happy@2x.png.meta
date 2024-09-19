@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      monkey_armsup_happy@2x_0: 6452673901738723539
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

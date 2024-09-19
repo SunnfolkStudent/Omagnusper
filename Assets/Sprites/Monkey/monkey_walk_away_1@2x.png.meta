@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      monkey_walk_away_1@2x_0: -7484953575615107320
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
