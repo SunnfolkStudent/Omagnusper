@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
                 _rigidbody2D.linearVelocityY = jumpSpeed;
                 _audioSource.pitch = Random.Range(0.6f, 0.8f);
                 _audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
+                
             }
             else if (_hasDoubleJump)
             {
