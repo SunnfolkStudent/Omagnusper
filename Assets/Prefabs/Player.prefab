@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7070218101731497899}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: GroundCheck
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 69872297
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.98490566, g: 0.952616, b: 0.29547158, a: 1}
@@ -201,7 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Horizontal: 0
-  Jump: 0
+  JumpPressed: 0
+  JumpRelease: 0
 --- !u!114 &8172518556210455109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +235,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 58a2711eebab9c649b72952de6d12f79, type: 3}
   - {fileID: 8300000, guid: 98b7c5fa3c0061b42824a3556b612322, type: 3}
   - {fileID: 8300000, guid: 5ffa592939cabfb4b9d200154cf49906, type: 3}
+  currentPitchRandom: 0
+  pitchRandomTime: 0
 --- !u!95 &5758041770807537801
 Animator:
   serializedVersion: 7
@@ -244,7 +247,7 @@ Animator:
   m_GameObject: {fileID: 5602177897270774943}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8c4ae5774cf6a5a488d749fd8b87c3de, type: 2}
+  m_Controller: {fileID: 9100000, guid: 570e13d5e2cc75f42a54f84da090d9a3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
