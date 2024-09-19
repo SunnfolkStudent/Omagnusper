@@ -6,15 +6,17 @@ TagManager:
   tags:
   - Death
   - Enemy
+  - Ground
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -42,6 +44,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MiddleGround
+    uniqueID: 634475721
+    locked: 0
+  - name: BackGround
+    uniqueID: 3104795015
+    locked: 0
+  - name: Details
+    uniqueID: 3619005743
     locked: 0
   m_RenderingLayers:
   - Default
