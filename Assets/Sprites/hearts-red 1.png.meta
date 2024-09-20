@@ -70,7 +70,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -108,7 +108,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -435,7 +435,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      hearts-red 1_0: -1875609090404336595
+      hearts-red 1_1: -3998378054282262446
+      hearts-red 1_10: 2405683605506315850
+      hearts-red 1_11: 2831111014143259395
+      hearts-red 1_2: -3085982690258674199
+      hearts-red 1_3: -6571758347573666979
+      hearts-red 1_4: 5747709228740021225
+      hearts-red 1_5: 8681526659804440442
+      hearts-red 1_6: 4638883949363347974
+      hearts-red 1_7: 1908610674840144796
+      hearts-red 1_8: 3014325240868402818
+      hearts-red 1_9: 1775082725689084539
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
