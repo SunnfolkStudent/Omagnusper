@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -18,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float _damageCooldownTimer;
     
     // Decides if you have DoubleJump, bool for simplicity
-    private bool _hasDoubleJump = false;
+    public float jumpCount = 2f;
     
     // Allows interaction with Animator component
     private Animator _animator;
@@ -38,6 +41,13 @@ public class PlayerController : MonoBehaviour
     public float pitchRandomTime;
     private float pitchTimer;
     
+    [Header("Swinging")]
+    public Transform swingingTarget;
+    public Transform ropeCheck;
+    public LayerMask whatIsRope;
+    public HingeJoint2D hingeJoint2D;
+    public bool isSwinging;
+    public float swingCheckRadius = 0.2f;
     
     [Header("Components")]
     private SpriteRenderer _playerSpriteRenderer;
@@ -45,6 +55,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Rigidbody2D _parentRigidbody2D;
     private AudioSource _audioSource;
+    private Rigidbody2D _ropeRigidbody;
 
     private void Start()
     {
@@ -54,11 +65,11 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _audioSource = GetComponent<AudioSource>();
+        hingeJoint2D = GetComponent<HingeJoint2D>();
     }
 
     private void Update()
     {
-
         if (_input.Horizontal != 0)
         {
             if (_rigidbody2D.linearVelocityX >= 0.0f) 
@@ -71,15 +82,14 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        
-        
         // Uses Physics2D.OverlapBox() to check if the ground and the player's bottom box is overlapping
         playerIsGrounded = Physics2D.OverlapBox(groundCheck.position, groundBoxSize, 0f, whatIsGround);
 
         if (playerIsGrounded)
         {
-            _hasDoubleJump = true;
+            jumpCount = 2f;
         }
+        
         // Checks both if jump is possible (Which it always is) and if the player is on the ground
         if (_input.JumpPressed)
         {
@@ -90,10 +100,17 @@ public class PlayerController : MonoBehaviour
                 _audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
                 
             }
-            else if (_hasDoubleJump)
+            else if (jumpCount == 3f)
             {
                 _rigidbody2D.linearVelocityY = jumpSpeed;
-                _hasDoubleJump = false;
+                jumpCount -= 1;
+                _audioSource.pitch = 0.9f;
+                _audioSource.PlayOneShot(jumpSounds[Random.Range(1, jumpSounds.Length -1)]);
+            }
+            else if (jumpCount >= 2f)
+            {
+                _rigidbody2D.linearVelocityY = jumpSpeed;
+                jumpCount -= 1;
                 _audioSource.pitch = 1.1f;
                 _audioSource.PlayOneShot(jumpSounds[Random.Range(2, jumpSounds.Length)]);
             }
@@ -104,6 +121,7 @@ public class PlayerController : MonoBehaviour
             _audioSource.Stop();
         }
         UpdateAnimation();
+        UpdateSwing();
         Attack();
     }
     
@@ -136,6 +154,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // FixedUpdate() updates 50 times every second
+        if (isSwinging) return;
         _rigidbody2D.linearVelocityX = _input.Horizontal * moveSpeed;
     }
 
@@ -169,6 +188,9 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(groundCheck.position, groundBoxSize);
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(ropeCheck.position, 0.2f);
     }
     
     private void RestartScene() 
@@ -234,7 +256,39 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage();
         }
-        
     }
-    
+
+    private void UpdateSwing()
+    {
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            var other = Physics2D.OverlapCircle(ropeCheck.position, swingCheckRadius, whatIsRope);
+            if (other == null) return;
+       
+            swingingTarget = other.transform;
+            _ropeRigidbody = swingingTarget.GetComponent<Rigidbody2D>();
+            transform.parent = other.transform;
+            isSwinging = true;
+            _rigidbody2D.gravityScale = 0; // Disable gravity
+            _rigidbody2D.linearVelocity = Vector2.zero;
+            jumpCount = 3f;
+
+        }
+        else if (isSwinging && (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame))
+        {
+            transform.parent = null;
+            swingingTarget = null;
+            isSwinging = false;
+            _rigidbody2D.linearVelocity = Vector2.zero;
+            _rigidbody2D.gravityScale = 1;
+            _ropeRigidbody = null;
+
+        }
+
+        if (isSwinging)
+        {
+            _ropeRigidbody.AddForce(transform.right * (_input.Horizontal * 1f), ForceMode2D.Impulse);
+            transform.position = _ropeRigidbody.transform.position;
+        }
+    }
 }
