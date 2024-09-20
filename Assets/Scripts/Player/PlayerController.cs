@@ -93,10 +93,19 @@ public class PlayerController : MonoBehaviour
         {
             jumpCount = 2f;
         }
+        if (!playerIsGrounded && !isSwinging)
+        {
+            moveSpeed = 8f;
+        }
+        else
+        {
+            moveSpeed = 5f;
+        }
         
         // Checks both if jump is possible (Which it always is) and if the player is on the ground
         if (_input.JumpPressed)
         {
+            
             if (playerIsGrounded)
             {
                 _rigidbody2D.linearVelocityY = jumpSpeed;
@@ -276,6 +285,7 @@ public class PlayerController : MonoBehaviour
             isSwinging = true;
             _ropeRigidbody.linearVelocity = _rigidbody2D.linearVelocity;
             _rigidbody2D.gravityScale = 0; // Disable gravity
+            _ropeRigidbody.AddForce(transform.right * _rigidbody2D.linearVelocity.x, ForceMode2D.Impulse);
             _rigidbody2D.linearVelocity = Vector2.zero;
             jumpCount = 3f;
 
