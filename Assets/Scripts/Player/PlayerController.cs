@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -50,6 +49,9 @@ public class PlayerController : MonoBehaviour
     public bool isSwinging;
     public float swingCheckRadius = 0.2f;
     
+    [Header("MushroomCollect")]
+    public int mushroomsCollected = 0;
+
     
     [Header("Components")]
     private SpriteRenderer _playerSpriteRenderer;
@@ -58,7 +60,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _parentRigidbody2D;
     private AudioSource _audioSource;
     private Rigidbody2D _ropeRigidbody;
-    
 
     private void Start()
     {
@@ -178,9 +179,10 @@ public class PlayerController : MonoBehaviour
         // Destroys every gameObject you collide with
         foreach (var enemy in enemyColliders)
         {
-
             enemy.GetComponent<FollowEnemyController>().PlayDeath();
-            //Destroy(enemy.gameObject);
+            Destroy(enemy.gameObject);
+            mushroomsCollected++;
+
         }
         
         _rigidbody2D.linearVelocityY = jumpSpeed / 1.1f;
