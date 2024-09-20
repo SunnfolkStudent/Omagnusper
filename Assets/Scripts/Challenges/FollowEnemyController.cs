@@ -49,9 +49,9 @@ public class FollowEnemyController : MonoBehaviour
 
     public void PlayDeath()
     {
+        print("Hallo!");
         _animator.Play("Shroom_Die");
         _circleCollider2D.enabled = false;
-        
     }
 
     private void DestroyEnemy()

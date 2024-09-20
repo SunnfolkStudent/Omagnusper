@@ -180,7 +180,6 @@ public class PlayerController : MonoBehaviour
         foreach (var enemy in enemyColliders)
         {
             enemy.GetComponent<FollowEnemyController>().PlayDeath();
-            Destroy(enemy.gameObject);
             mushroomsCollected++;
 
         }
