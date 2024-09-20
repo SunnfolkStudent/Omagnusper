@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour
     public bool isSwinging;
     public float swingCheckRadius = 0.2f;
     
+    [Header("MushroomCollect")]
+    public int mushroomsCollected = 0;
+    
     [Header("Components")]
     private SpriteRenderer _playerSpriteRenderer;
     private InputActions _input;
@@ -176,6 +179,7 @@ public class PlayerController : MonoBehaviour
         foreach (var enemy in enemyColliders)
         {
             Destroy(enemy.gameObject);
+            mushroomsCollected++;
         }
         
         _rigidbody2D.linearVelocityY = jumpSpeed / 1.1f;
@@ -211,6 +215,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.parent = other.transform;
             _parentRigidbody2D = other.gameObject.GetComponent<Rigidbody2D>();
+        }
+        
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            mushroomsCollected++;
+            Destroy(other.gameObject);
         }
     }
 
