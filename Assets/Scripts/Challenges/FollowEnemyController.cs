@@ -24,7 +24,7 @@ public class FollowEnemyController : MonoBehaviour
     private void Update()
     {
         
-        
+        if (_circleCollider2D.enabled == false) return;
         if (_target == null) return;
 
         _moveDirection = _target.position - transform.position;
@@ -41,6 +41,7 @@ public class FollowEnemyController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (_circleCollider2D.enabled == false) return;
         if (canChase)
         {
             _rigidbody2D.linearVelocity = _moveDirection * moveSpeed;
