@@ -264,11 +264,11 @@ public class PlayerController : MonoBehaviour
         {
             var other = Physics2D.OverlapCircle(ropeCheck.position, swingCheckRadius, whatIsRope);
             if (other == null) return;
-       
             swingingTarget = other.transform;
             _ropeRigidbody = swingingTarget.GetComponent<Rigidbody2D>();
             transform.parent = other.transform;
             isSwinging = true;
+            _ropeRigidbody.linearVelocity = _rigidbody2D.linearVelocity;
             _rigidbody2D.gravityScale = 0; // Disable gravity
             _rigidbody2D.linearVelocity = Vector2.zero;
             jumpCount = 3f;
@@ -279,7 +279,6 @@ public class PlayerController : MonoBehaviour
             transform.parent = null;
             swingingTarget = null;
             isSwinging = false;
-            _rigidbody2D.linearVelocity = Vector2.zero;
             _rigidbody2D.gravityScale = 1;
             _ropeRigidbody = null;
 
@@ -287,7 +286,7 @@ public class PlayerController : MonoBehaviour
 
         if (isSwinging)
         {
-            _ropeRigidbody.AddForce(transform.right * (_input.Horizontal * 1f), ForceMode2D.Impulse);
+            _ropeRigidbody.AddForce(transform.right * (_input.Horizontal * 0.05f), ForceMode2D.Impulse);
             transform.position = _ropeRigidbody.transform.position;
         }
     }
