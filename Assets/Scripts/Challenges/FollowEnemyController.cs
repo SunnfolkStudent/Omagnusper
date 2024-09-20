@@ -11,6 +11,7 @@ public class FollowEnemyController : MonoBehaviour
     private Vector2 _moveDirection;
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
+    private CircleCollider2D _circleCollider2D;
     
     private void Start()
     {
@@ -18,9 +19,12 @@ public class FollowEnemyController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _animator.Play("Bat_Idle");
         _target = GameObject.FindGameObjectWithTag("Player").transform;
+        _circleCollider2D = GetComponent<CircleCollider2D>();
     }
     private void Update()
     {
+        
+        
         if (_target == null) return;
 
         _moveDirection = _target.position - transform.position;
@@ -42,6 +46,21 @@ public class FollowEnemyController : MonoBehaviour
             _rigidbody2D.linearVelocity = _moveDirection * moveSpeed;
         }
     }
+
+    public void PlayDeath()
+    {
+        _animator.Play("Shroom_Die");
+        _circleCollider2D.enabled = false;
+        
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
+    
+
+    
     
     private void OnDrawGizmos()
     {
