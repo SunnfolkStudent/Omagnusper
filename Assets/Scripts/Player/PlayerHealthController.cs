@@ -4,7 +4,10 @@ using UnityEngine.UI;
 public class PlayerHealthController : MonoBehaviour
 {
     public PlayerController player;
+    public PickUpMushroom playerPickUp;
     public Image[] hearts;
+    
+    public Slider mushroomSlider;
     
     public Sprite fullHeart;
     public Sprite emptyHeart;
@@ -22,5 +25,7 @@ public class PlayerHealthController : MonoBehaviour
                 hearts[i].sprite = emptyHeart;
             }
         }
+
+        mushroomSlider.value = playerPickUp.mushroomsCollected;
     }
 }
