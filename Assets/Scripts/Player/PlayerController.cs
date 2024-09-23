@@ -225,6 +225,12 @@ public class PlayerController : MonoBehaviour
             transform.parent = other.transform;
             _parentRigidbody2D = other.gameObject.GetComponent<Rigidbody2D>();
         }
+
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            mushroomsCollected++;
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnCollisionExit(Collision other)
