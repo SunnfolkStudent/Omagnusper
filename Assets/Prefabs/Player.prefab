@@ -49,6 +49,8 @@ GameObject:
   - component: {fileID: 8159336213328964136}
   - component: {fileID: 7272080812905874221}
   - component: {fileID: 8984537962735498782}
+  - component: {fileID: 413269756703498522}
+  - component: {fileID: 4231954667686733865}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -71,6 +73,7 @@ Transform:
   m_Children:
   - {fileID: 7070218101731497899}
   - {fileID: 3011056343374992491}
+  - {fileID: 518105938016045364}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &322950057996977977
@@ -242,7 +245,7 @@ MonoBehaviour:
   currentPitchRandom: 0
   pitchRandomTime: 0
   swingingTarget: {fileID: 0}
-  ropeCheck: {fileID: 3011056343374992491}
+  ropeCheck: {fileID: 518105938016045364}
   whatIsRope:
     serializedVersion: 2
     m_Bits: 256
@@ -416,6 +419,84 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &413269756703498522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602177897270774943}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d5c0962c2381540abeb59a6e9e1645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingForce: 10
+  rope: {fileID: 0}
+  rb: {fileID: 537421286429270472}
+  isSwinging: 0
+  swingCheck: {fileID: 518105938016045364}
+  swingRadius: 0.17
+  whatIsRope:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!233 &4231954667686733865
+HingeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602177897270774943}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: -1.742, y: -1.156}
+  m_UseConnectedAnchor: 1
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 0
+  m_AngleLimits:
+    m_LowerAngle: 0
+    m_UpperAngle: 359
+--- !u!1 &6164097121810472886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 518105938016045364}
+  m_Layer: 0
+  m_Name: SwingCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &518105938016045364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6164097121810472886}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8160162407869026199}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8320450630037283242
 GameObject:
   m_ObjectHideFlags: 0

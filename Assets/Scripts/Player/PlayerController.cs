@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
     public Transform swingingTarget;
     public Transform ropeCheck;
     public LayerMask whatIsRope;
-    public HingeJoint2D hingeJoint2D;
     public bool isSwinging;
     public float swingCheckRadius = 0.2f;
     
@@ -69,7 +68,6 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         _audioSource = GetComponent<AudioSource>();
-        hingeJoint2D = GetComponent<HingeJoint2D>();
     }
 
     private void Update()
